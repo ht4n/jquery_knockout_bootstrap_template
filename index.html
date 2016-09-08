@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>jQuery - Knockout - Bootstrap template</title>
+
+    <link rel="stylesheet" 
+        href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+        crossorigin="anonymous">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" 
+        crossorigin="anonymous">   
+</head>
+<body>
+    <!-- Include jquery, jquery-ui, knockout, bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+        crossorigin="anonymous"></script>
+
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>jQuery Knockout Bootstrap Scaffolding.</h1>
+        </div>
+        <form>
+            <div class="form-group">
+              <label for="input_url">Input Url</label>
+              <input type="text" class="form-control" id="input_url"
+                placeholder="url ... http://foo/bar/something ">
+            </div>
+
+            <div class="form-group">
+              <label for="input_tag">Input Url</label>
+              <input type="text" class="form-control" id="input_tag" data-bind="value: tag">
+            </div>
+            
+            <button type="button" class="btn btn-info"
+                data-bind="click: clickMe">Click Me</button>            
+        </form>
+
+        <hr/>
+
+        <h3 data-bind="text: tag"></h3>
+        <!-- ko foreach: places -->
+        <div>
+            <span data-bind="text: $data"></span>
+            <button data-bind="click: $parent.removePlace">Remove</button>
+        </div>
+        <!-- /ko -->
+    </div>
+        
+    <script type="text/javascript">
+        function MyViewModel() {
+            var self = this;
+            self.places = ko.observableArray(['London', 'Paris', 'Tokyo']);
+            self.tag = ko.observable("#hashtag");
+
+            self.clickMe = function() {
+                console.log("clickMe");
+            }
+
+            self.removePlace = function(place) {
+                self.places.remove(place);
+            }
+        }
+
+        $(document).ready(function() {
+            ko.applyBindings(new MyViewModel());
+        });
+    </script>    
+</body>
+</html>
